@@ -1,6 +1,9 @@
-const factorialRecursive = (n) => {
-  if (n === 0 || n === 1) {
-    return 1;
+function maxProfit(prices) {
+  let minPrice = Infinity;
+  let maxProfit = 0;
+  for (const price of prices) {
+    minPrice = Math.min(minPrice, price);
+    maxProfit = Math.max(maxProfit, price - minPrice);
   }
-  return n * factorialRecursive(n - 1);
-};
+  return maxProfit;
+}
