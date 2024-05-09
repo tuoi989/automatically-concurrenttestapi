@@ -1,9 +1,20 @@
-function maxProfit(prices) {
-  let minPrice = Infinity;
-  let maxProfit = 0;
-  for (const price of prices) {
-    minPrice = Math.min(minPrice, price);
-    maxProfit = Math.max(maxProfit, price - minPrice);
+function findItinerary(tickets) {
+  const graph = new Map();
+  for (const [from, to] of tickets) {
+    if (!graph.has(from)) graph.set(from, []);
+    graph.get(from).push(to);
   }
-  return maxProfit;
+  for (const destinations of graph.values()) {
+    destinations.sort();
+  }
+  const result = [];
+  dfs("JFK");
+  return result.reverse();
+  function dfs(from) {
+    const destinations = graph.get(from);
+    while (destinations && destinations.length) {
+      dfs(destinations.shift());
+    }
+    result.push(from);
+  }
 }
